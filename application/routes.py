@@ -18,7 +18,8 @@ def index():
     #mycursor.executemany(sql, val)
     #mydb.commit()
     mycursor = mydb.cursor()
-    sql = "SELECT * FROM user WHERE email LIKE '%or%'"
+    #sql = "SELECT * FROM user WHERE email LIKE '%or%'"
+    sql = "SELECT * FROM user ORDER BY email"
     mycursor.execute(sql)
     myresult = mycursor.fetchall()
     for x in myresult:
