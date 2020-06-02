@@ -6,6 +6,39 @@ mycursor = mydb.cursor()
 @app.route("/")
 @app.route("/index")
 def index():
+    '''
+    sql = "SELECT \
+        class.char_class As c, \
+        user.email AS u \
+        FROM class \
+        INNER JOIN user ON user.name = class.char_name"
+    '''
+    sql = "SELECT * FROM class INNER JOIN user ON class.char_name = user.name"
+    
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        print(f"--> {x}")
+    return render_template("index.html", nav_index="active")
+
+@app.route("/index3")
+def index3():
+    mycursor = mydb.cursor()
+    #sql = "DELETE FROM user WHERE email = %s"
+    #adr = ("Stormbringer", )
+    #mycursor.execute(sql, adr)
+    #mydb.commit()
+    #sql = "DROP TABLE IF EXISTS flaskhtmldb"
+    sql = "UPDATE user SET email = %s WHERE email = %s"
+    val = ("Sword", "Longsword")
+    mycursor.execute(sql, val)
+    mydb.commit()
+    print(f"{mycursor.rowcount}, record(s) affected")
+    #print(mycursor.rowcount, "record(s) deleted")
+    return render_template("index.html", nav_index="active")
+
+@app.route("/index2")
+def index2():
     #mycursor.execute("ALTER TABLE flaskhtmldb ADD COLUMN char_id INT")
     #mycursor.execute("CREATE TABLE user (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255))")
     #sql = "INSERT INTO user (name, email) VALUES (%s, %s)"
@@ -17,13 +50,13 @@ def index():
     ]'''
     #mycursor.executemany(sql, val)
     #mydb.commit()
-    mycursor = mydb.cursor()
-    sql = "DELETE FROM user WHERE email = 'Axe'"
+    #mycursor = mydb.cursor()
+    #sql = "DELETE FROM user WHERE email = 'Axe'"
     #sql = "SELECT * FROM user WHERE email LIKE '%or%'"
     #sql = "SELECT * FROM user ORDER BY email"
-    mycursor.execute(sql)
-    mydb.commit()
-    print (f"{mycursor.rowcount}, record(s) deleted")
+    #mycursor.execute(sql)
+    #mydb.commit()
+    #print (f"{mycursor.rowcount}, record(s) deleted")
     #myresult = mycursor.fetchall()
     #for x in myresult:
     #    print(x)
