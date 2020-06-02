@@ -8,14 +8,19 @@ mycursor = mydb.cursor()
 def index():
     #mycursor.execute("ALTER TABLE flaskhtmldb ADD COLUMN char_id INT")
     #mycursor.execute("CREATE TABLE user (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255))")
-    sql = "INSERT INTO user (name, email) VALUES (%s, %s)"
-    val = ("Ynzon", "Axe")
-    mycursor.execute(sql, val)
+    #sql = "INSERT INTO user (name, email) VALUES (%s, %s)"
+    #val = ("Ynzon", "Axe")
+    #mycursor.execute(sql, val)
     '''val = [
         ('Red Sonya', "Sword"),
         ('Wulfgar', "Hammer")
     ]'''
     #mycursor.executemany(sql, val)
-    mydb.commit()
-    print (f"record inserted ID:{mycursor.lastrowid}")
+    #mydb.commit()
+    mycursor = mydb.cursor()
+    mycursor.execute("SELECT name, email FROM user")
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        print(f"--- {x}")
+    #print (f"record inserted ID:{mycursor.lastrowid}")
     return render_template("index.html", nav_index="active")
