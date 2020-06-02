@@ -18,9 +18,14 @@ def index():
     #mycursor.executemany(sql, val)
     #mydb.commit()
     mycursor = mydb.cursor()
-    mycursor.execute("SELECT name, email FROM user")
+    sql = "SELECT * FROM user WHERE email LIKE '%or%'"
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        print(x)
+    #mycursor.execute("SELECT name, email FROM user")
     #myresult = mycursor.fetchall()
-    myresult = mycursor.fetchone()
-    print(f"----> {myresult}")
+    #myresult = mycursor.fetchone()
+    #print(f"----> {myresult}")
     #print (f"record inserted ID:{mycursor.lastrowid}")
     return render_template("index.html", nav_index="active")
