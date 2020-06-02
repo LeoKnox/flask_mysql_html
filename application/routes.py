@@ -18,12 +18,15 @@ def index():
     #mycursor.executemany(sql, val)
     #mydb.commit()
     mycursor = mydb.cursor()
+    sql = "DELETE FROM user WHERE email = 'Axe'"
     #sql = "SELECT * FROM user WHERE email LIKE '%or%'"
-    sql = "SELECT * FROM user ORDER BY email"
+    #sql = "SELECT * FROM user ORDER BY email"
     mycursor.execute(sql)
-    myresult = mycursor.fetchall()
-    for x in myresult:
-        print(x)
+    mydb.commit()
+    print (f"{mycursor.rowcount}, record(s) deleted")
+    #myresult = mycursor.fetchall()
+    #for x in myresult:
+    #    print(x)
     #mycursor.execute("SELECT name, email FROM user")
     #myresult = mycursor.fetchall()
     #myresult = mycursor.fetchone()
