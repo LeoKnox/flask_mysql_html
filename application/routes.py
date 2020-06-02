@@ -19,8 +19,8 @@ def index():
     #mydb.commit()
     mycursor = mydb.cursor()
     mycursor.execute("SELECT name, email FROM user")
-    myresult = mycursor.fetchall()
-    for x in myresult:
-        print(f"--- {x}")
+    #myresult = mycursor.fetchall()
+    myresult = mycursor.fetchone()
+    print(f"----> {myresult}")
     #print (f"record inserted ID:{mycursor.lastrowid}")
     return render_template("index.html", nav_index="active")
